@@ -20,10 +20,7 @@ export interface EventDoc extends Document {
   };
   is_free: boolean;
   ticket_info: {
-    first_category: string;
-    second_category: string;
-    third_category: string;
-    fourth_category: string;
+    [key: string]: string | undefined;
   };
   rules: {
     age_limit: number;
@@ -57,10 +54,8 @@ const eventSchema = new Schema({
   },
   is_free: Boolean,
   ticket_info: {
-    first_category: String,
-    second_category: String,
-    third_category: String,
-    fourth_category: String,
+    type: Map,
+    of: String,
   },
   rules: {
     age_limit: Number,
