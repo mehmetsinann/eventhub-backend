@@ -5,7 +5,7 @@ const express = require("express");
 const eventRouter = express.Router();
 
 // Get all events endpoint
-eventRouter.get("/", async (req: any, res: any) => {
+eventRouter.get("/events", async (req: any, res: any) => {
   try {
     const events = await Event.find();
     res.json(events);
@@ -16,7 +16,7 @@ eventRouter.get("/", async (req: any, res: any) => {
 });
 
 // Search endpoint
-eventRouter.get("/search", async (req: any, res: any) => {
+eventRouter.get("/events/search", async (req: any, res: any) => {
   const { query } = req.query;
 
   try {
@@ -43,7 +43,7 @@ eventRouter.get("/search", async (req: any, res: any) => {
 });
 
 // Get categories endpoint
-eventRouter.get("/categories", async (req: any, res: any) => {
+eventRouter.get("/events/categories", async (req: any, res: any) => {
   try {
     const categories = await Event.distinct("category");
     res.json(categories);
@@ -54,7 +54,7 @@ eventRouter.get("/categories", async (req: any, res: any) => {
 });
 
 // New event endpoint
-eventRouter.post("/new", async (req: any, res: any) => {
+eventRouter.post("/events/newEvent", async (req: any, res: any) => {
   try {
     const event = new Event(req.body);
     const savedEvent = await event.save();
@@ -66,7 +66,7 @@ eventRouter.post("/new", async (req: any, res: any) => {
 });
 
 // Get single event endpoint
-eventRouter.get("/:id", async (req: any, res: any) => {
+eventRouter.get("/events/:id", async (req: any, res: any) => {
   try {
     const event = await Event.findById(req.params.id);
     res.json(event);
@@ -77,7 +77,7 @@ eventRouter.get("/:id", async (req: any, res: any) => {
 });
 
 // Delete event endpoint
-eventRouter.delete("/:id", async (req: any, res: any) => {
+eventRouter.delete("/events/:id", async (req: any, res: any) => {
   try {
     const event = await Event.findByIdAndDelete(req.params.id);
     res.json(event);

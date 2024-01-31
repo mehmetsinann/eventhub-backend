@@ -17,7 +17,7 @@ mongoose
 
 app.use(express.json());
 
-app.use("/events", eventRouter);
+app.use("/eventhub/api", eventRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
