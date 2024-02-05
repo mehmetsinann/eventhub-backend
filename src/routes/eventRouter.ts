@@ -54,11 +54,14 @@ eventRouter.get("/events/categories", async (req: any, res: any) => {
 });
 
 // New event endpoint
-eventRouter.post("/events/newEvent", async (req: any, res: any) => {
+eventRouter.post("/events/new", async (req: any, res: any) => {
   try {
     const event = new Event(req.body);
     const savedEvent = await event.save();
-    res.json(savedEvent);
+    res.json({
+      message: "Event created",
+      event: savedEvent,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
@@ -80,7 +83,10 @@ eventRouter.get("/events/:id", async (req: any, res: any) => {
 eventRouter.delete("/events/:id", async (req: any, res: any) => {
   try {
     const event = await Event.findByIdAndDelete(req.params.id);
-    res.json(event);
+    res.json({
+      message: "Event deleted",
+      event,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
