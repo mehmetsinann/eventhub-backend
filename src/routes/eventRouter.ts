@@ -56,11 +56,10 @@ eventRouter.get("/events/categories", async (req: any, res: any) => {
 // New event endpoint
 eventRouter.post("/events/new", async (req: any, res: any) => {
   try {
-    const event = new Event(req.body);
-    const savedEvent = await event.save();
+    const events = await Event.insertMany(req.body);
     res.json({
-      message: "Event created",
-      event: savedEvent,
+      message: "Events created",
+      events,
     });
   } catch (error) {
     console.error(error);
