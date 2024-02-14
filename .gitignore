@@ -1,2 +1,4 @@
 # add node_modules here
 node_modules/
+
+.env
