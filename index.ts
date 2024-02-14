@@ -2,6 +2,8 @@ import eventRouter from "./src/routes/eventRouter";
 
 const express = require("express");
 
+require("dotenv").config();
+
 const app = express();
 
 app.use(express.json());
@@ -9,7 +11,7 @@ app.use(express.json());
 const connectDB = require("./connectMongo");
 // console.log(process.env.MONGO_URI);
 connectDB();
-const PORT = 8080;
+const PORT = process.env.PORT;
 
 app.use("/eventhub/api", eventRouter);
 
